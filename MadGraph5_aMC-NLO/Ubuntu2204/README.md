@@ -33,7 +33,7 @@ Additionally contains MadGraph5 controlled dependencies for NLO processes:
 
 In Ubuntu 22.04 and future versions, the `/usr/include/rpc` is moved to `/usr/include/tirpc`
 
-* To compile Fastjet, need to set flags 'LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc' for configure
+* To compile Fastjet, need to set flags `LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc` for configure
 * For ExRootAnalysis, need to change `CXXFLAGS += $(ROOTCFLAGS) -Wno-write-strings -D_FILE_OFFSET_BITS=64 -DDROP_CGAL -I. -I/usr/include/tirpc` and ` LIBS = $(ROOTLIBS) -ltirpc` in the `Makefile`
 
 ### The `PYTHONPATH` issue
