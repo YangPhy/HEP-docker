@@ -151,12 +151,12 @@ RUN wget https://pythia.org/download/pythia${PYTHIA_VERSION:0:2}/pythia${PYTHIA_
 # Install WHIZARD
 ARG WH_VER=3.1.2
 RUN wget https://whizard.hepforge.org/downloads/?f=whizard-${WH_VER}.tar.gz -O ~/whizard-${WH_VER}.tar.gz \
-    && cd /home/${USER_NAME}/work/HEPtools \
+    && cd /home/${USER_NAME}/work \
     && tar -xvf ~/whizard-${WH_VER}.tar.gz \
     && cd whizard-${WH_VER} \
     && export HEPMC_DIR=/home/yang/work/HEPtools/hepmc \
     &&  ../whizard-${WH_VER}/configure \
-      --prefix=/home/${USER_NAME}/work/HEPtools/whizard \
+      --prefix=/home/${USER_NAME}/work/whizard \
       --enable-fc-openmp --enable-python --enable-lhapdf \
       --enable-hepmc --enable-pythia8 --enable-fastjet \
       --with-pythia8=/home/${USER_NAME}/work/HEPtools/pythia8 \
@@ -167,7 +167,7 @@ RUN wget https://whizard.hepforge.org/downloads/?f=whizard-${WH_VER}.tar.gz -O ~
 # Need to set the following flags 
       LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc \  
     && make && make install \
-    && cd /home/${USER_NAME}/work/HEPtools \ 
+    && cd /home/${USER_NAME}/work \ 
     && rm -rf whizard-${WH_VER} && rm ~/whizard-${WH_VER}.tar.gz   
 
 WORKDIR /home/${USER_NAME}/work
