@@ -31,7 +31,7 @@ Additionally contains MadGraph5 controlled dependencies for NLO processes:
 
 ### `pythia8` "undefined reference to `pthread_create`" issue 
 
-Need to add `-pthread` and `-lpthread` flages for configure, as the following
+Need to add `-pthread` and `-lpthread` flags for configure, as the following
 ```
 --cxx-common="-O2 -pedantic -pthread  -lpthread -W -Wall -Wshadow -fPIC -std=c++17"
 ```

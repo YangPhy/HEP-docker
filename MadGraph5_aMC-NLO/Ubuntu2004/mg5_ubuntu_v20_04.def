@@ -176,7 +176,7 @@ RUN cd ~ \
     && echo "set auto_convert_model T" | mg5_aMC \
     && rm -rf ppee_nlo py.py && rm -rf /home/${USER_NAME}/work/MG5_aMC/HEPTools/HEPToolsInstallers
 
-# WORKDIR /home/${USER_NAME}/work
+WORKDIR /home/${USER_NAME}/work
 # VOLUME /home/${USER_NAME}/Data
 RUN mkdir -p ~/Data
 

@@ -205,7 +205,7 @@ RUN wget https://madgraph.mi.infn.it//Downloads/ExRootAnalysis/ExRootAnalysis_V$
     && tar -xvf ~/ExRootAnalysis_V${ExRootAnalysis_VER}.tar.gz \
     && cd /home/${USER_NAME}/work/HEPtools/ExRootAnalysis \
 # In Ubuntu 22.04 and future versions, the /usr/include/rpc is moved to /usr/include/tirpc
-# Need to modify the Makefile to set the flages     
+# Need to modify the Makefile to set the flags     
     && sed -i "s|CXXFLAGS +=.*|CXXFLAGS += \$(ROOTCFLAGS) -Wno-write-strings -D_FILE_OFFSET_BITS=64 -DDROP_CGAL -I. -I/usr/include/tirpc|g" /home/${USER_NAME}/work/HEPtools/ExRootAnalysis/Makefile \
     && sed -i "s|LIBS =.*|LIBS = \$(ROOTLIBS) -ltirpc|g" /home/${USER_NAME}/work/HEPtools/ExRootAnalysis/Makefile \
     && source /home/${USER_NAME}/work/HEPtools/root/bin/thisroot.sh \
@@ -229,7 +229,7 @@ RUN wget http://cp3.irmp.ucl.ac.be/downloads/Delphes-3-current.tar.gz -O ~/Delph
     && sed -i "s|# delphes_path.*|delphes_path = /home/${USER_NAME}/work/HEPtools/Delphes|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt
 
     
-# WORKDIR /home/${USER_NAME}/work
+WORKDIR /home/${USER_NAME}/work
 # VOLUME /home/${USER_NAME}/Data
 RUN mkdir -p ~/Data
 

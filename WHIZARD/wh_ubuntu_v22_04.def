@@ -112,7 +112,7 @@ RUN wget http://fastjet.fr/repo/fastjet-${FASTJET_VERSION}.tar.gz -O ~/fastjet-$
       --prefix=/home/${USER_NAME}/work/HEPtools/fastjet \
       --enable-pyext=yes \
 # In Ubuntu 22.04 and future versions, the /usr/include/rpc is moved to /usr/include/tirpc
-# Need to set the following flages       
+# Need to set the following flags       
       LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc \
     && make -j$(($(nproc) - 1)) \
     && make check && make install \
@@ -155,12 +155,22 @@ RUN wget https://whizard.hepforge.org/downloads/?f=whizard-${WH_VER}.tar.gz -O ~
     && tar -xvf ~/whizard-${WH_VER}.tar.gz \
     && cd whizard-${WH_VER} \
     && export HEPMC_DIR=/home/yang/work/HEPtools/hepmc \
-    &&  ../whizard-${WH_VER}/configure --prefix=/home/${USER_NAME}/work/HEPtools/whizard --enable-fc-openmp --enable-python --enable-lhapdf --enable-hepmc --enable-pythia8 --enable-fastjet --with-pythia8=/home/${USER_NAME}/work/HEPtools/pythia8 --with-hepmc=/home/${USER_NAME}/work/HEPtools/hepmc --with-fastjet=/home/${USER_NAME}/work/HEPtools/fastjet --with-LHAPDF=/home/yang/work/HEPtools/lhapdf \
+    &&  ../whizard-${WH_VER}/configure \
+      --prefix=/home/${USER_NAME}/work/HEPtools/whizard \
+      --enable-fc-openmp --enable-python --enable-lhapdf \
+      --enable-hepmc --enable-pythia8 --enable-fastjet \
+      --with-pythia8=/home/${USER_NAME}/work/HEPtools/pythia8 \
+      --with-hepmc=/home/${USER_NAME}/work/HEPtools/hepmc \
+      --with-fastjet=/home/${USER_NAME}/work/HEPtools/fastjet \
+      --with-LHAPDF=/home/yang/work/HEPtools/lhapdf \
+# In Ubuntu 22.04 and future versions, the /usr/include/rpc is moved to /usr/include/tirpc
+# Need to set the following flags 
+      LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc      
     && make && make install \
     && cd /home/${USER_NAME}/work/HEPtools \ 
     && rm -rf whizard-${WH_VER} && rm ~/whizard-${WH_VER}.tar.gz   
 
-# WORKDIR /home/${USER_NAME}/work
+WORKDIR /home/${USER_NAME}/work
 # VOLUME /home/${USER_NAME}/Data
 RUN mkdir -p ~/Data
 

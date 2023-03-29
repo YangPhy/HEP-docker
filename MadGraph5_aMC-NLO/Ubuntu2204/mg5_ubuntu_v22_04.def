@@ -113,7 +113,7 @@ RUN wget http://fastjet.fr/repo/fastjet-${FASTJET_VERSION}.tar.gz -O ~/fastjet-$
       --prefix=/home/${USER_NAME}/work/HEPtools/fastjet \
       --enable-pyext=yes \
 # In Ubuntu 22.04 and future versions, the /usr/include/rpc is moved to /usr/include/tirpc
-# Need to set the following flages       
+# Need to set the following flags       
       LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc \
     && make -j$(($(nproc) - 1)) \
     && make check && make install \
@@ -183,7 +183,7 @@ RUN cd ~ \
     && echo "set auto_convert_model T" | mg5_aMC \
     && rm -rf ppee_nlo py.py && rm -rf /home/${USER_NAME}/work/MG5_aMC/HEPTools/HEPToolsInstallers
 
-# WORKDIR /home/${USER_NAME}/work
+WORKDIR /home/${USER_NAME}/work
 # VOLUME /home/${USER_NAME}/Data
 RUN mkdir -p ~/Data
 

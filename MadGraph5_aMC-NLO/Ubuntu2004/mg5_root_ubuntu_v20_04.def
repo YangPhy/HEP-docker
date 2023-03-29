@@ -137,7 +137,7 @@ RUN wget https://pythia.org/download/pythia${PYTHIA_VERSION:0:2}/pythia${PYTHIA_
        --with-fastjet3=/home/${USER_NAME}/work/HEPtools/fastjet \
        --with-python=$(command -v python3) \
        --with-python-include=/usr/include/python${PY_VER} \
-       # Use -pthread  -lpthread flages to fix undefined reference to `pthread_create'
+       # Use -pthread  -lpthread flags to fix undefined reference to `pthread_create'
        --cxx-common="-O2 -pedantic -pthread  -lpthread -W -Wall -Wshadow -fPIC -std=c++17" \
 # For AMD64 arch, apply -m64 
        #--cxx-common="-O2 -m64 -pedantic -pthread  -lpthread -W -Wall -Wshadow -fPIC -std=c++17" \
@@ -223,7 +223,7 @@ RUN wget http://cp3.irmp.ucl.ac.be/downloads/Delphes-3-current.tar.gz -O ~/Delph
     && sed -i "s|# delphes_path.*|delphes_path = /home/${USER_NAME}/work/HEPtools/Delphes|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt
 
 
-# WORKDIR /home/${USER_NAME}/work
+WORKDIR /home/${USER_NAME}/work
 # VOLUME /home/${USER_NAME}/Data
 RUN mkdir -p ~/Data
 
