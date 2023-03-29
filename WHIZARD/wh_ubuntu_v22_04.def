@@ -167,6 +167,8 @@ RUN wget https://whizard.hepforge.org/downloads/?f=whizard-${WH_VER}.tar.gz -O ~
 # Need to set the following flags 
       LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc \  
     && make && make install \
+    && echo "export PATH=\$PATH:/home/${USER_NAME}/work/whizard/bin" >> ~/.zshrc \ 
+    && echo "export LD_LIBRARY_PATH=/home/${USER_NAME}/work/whizard/lib:\$LD_LIBRARY_PATH" >> ~/.zshrc \
     && cd /home/${USER_NAME}/work \ 
     && rm -rf whizard-${WH_VER} && rm ~/whizard-${WH_VER}.tar.gz   
 
