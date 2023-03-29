@@ -156,6 +156,7 @@ RUN wget https://root.cern/download/root_v${ROOT_VER}.source.tar.gz -O ~/root_v$
     && cmake \
           -Dpythia8=ON -DPYTHIA8_DIR=/home/${USER_NAME}/work/HEPtools/pythia8 \
           -DCMAKE_INSTALL_PREFIX=../root ../root-${ROOT_VER} \
+          -DPYTHON_EXECUTABLE=/usr/bin/python3 \
     && cmake --build . -- install -j$(($(nproc) - 1)) \
     && cd /home/${USER_NAME}/work/HEPtools \
     && rm  -rf rootbuild root-${ROOT_VER} && rm ~/root_v${ROOT_VER}.source.tar.gz \
