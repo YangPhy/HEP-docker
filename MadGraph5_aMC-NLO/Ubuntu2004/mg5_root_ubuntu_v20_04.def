@@ -78,7 +78,7 @@ RUN sudo chown -hR ${USER_NAME} /home/${USER_NAME} \
     && echo "export LHAPDF_DATA_PATH=/home/${USER_NAME}/work/HEPtools/lhapdf/share/LHAPDF" >> ~/.zshrc 
 
 # Install HepMC
-ARG HEPMC_VERSION=2.06.09
+ARG HEPMC_VERSION=2.06.11
 
 RUN wget --no-check-certificate http://hepmc.web.cern.ch/hepmc/releases/hepmc${HEPMC_VERSION}.tgz -O ~/hepmc${HEPMC_VERSION}.tgz \
     && cd /home/${USER_NAME}/work/HEPtools \
