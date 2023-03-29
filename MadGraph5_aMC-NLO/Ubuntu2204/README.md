@@ -1,4 +1,4 @@
-# MadGraph5_aMC-NLO Python 3 Docker Image
+# MadGraph5_aMC-NLO Python 3 Docker Image for Ubuntu 22.04
 
 Docker image based on Ubuntu 22.04 for Python 3 compliant [MadGraph5_aMC@NLO](https://launchpad.net/mg5amcnlo). 
 
