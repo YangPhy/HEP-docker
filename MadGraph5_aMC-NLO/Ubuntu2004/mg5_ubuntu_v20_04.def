@@ -78,7 +78,7 @@ ARG HEPMC_VERSION=2.06.11
 RUN wget --no-check-certificate http://hepmc.web.cern.ch/hepmc/releases/hepmc${HEPMC_VERSION}.tgz -O ~/hepmc${HEPMC_VERSION}.tgz \
     && cd /home/${USER_NAME}/work/HEPtools \
     && tar -xvf ~/hepmc${HEPMC_VERSION}.tgz \
-    && cd hepmc${HEPMC_VERSION} \
+    && cd HepMC-${HEPMC_VERSION} \
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD' -O './config.guess' \
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD' -O './config.sub' \
     && cd /home/${USER_NAME}/work/HEPtools \
@@ -90,7 +90,7 @@ RUN wget --no-check-certificate http://hepmc.web.cern.ch/hepmc/releases/hepmc${H
       -Dmomentum:STRING=MEV \
       -Dlength:STRING=MM \
       -DCMAKE_INSTALL_PREFIX=/home/${USER_NAME}/work/HEPtools/hepmc \
-      -S /home/${USER_NAME}/work/HEPtools/hepmc${HEPMC_VERSION} \
+      -S /home/${USER_NAME}/work/HEPtools/HepMC-${HEPMC_VERSION} \
       -B /home/${USER_NAME}/work/HEPtools/build \
     && cmake build -L \
     && cmake --build build -- -j$(($(nproc) - 1))  \
