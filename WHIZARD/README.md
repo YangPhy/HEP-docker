@@ -6,6 +6,7 @@ Docker image based on Ubuntu 22.04 for [WHIZARD](https://whizard.hepforge.org/).
 
 The Docker image contains:
 
+* [WHIZARD](https://whizard.hepforge.org/) `v3.1.2`
 * Python 3.10
 * [HepMC2](http://hepmc.web.cern.ch/hepmc/) `v2.06.11`
 * [LHAPDF](https://lhapdf.hepforge.org/) `v6.5.4`
