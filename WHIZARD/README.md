@@ -11,7 +11,6 @@ The Docker image contains:
 * [LHAPDF](https://lhapdf.hepforge.org/) `v6.5.4`
 * [FastJet](http://fastjet.fr/) `v3.4.0`
 * [PYTHIA](https://pythia.org/) `v8.309`
-* [Delphes](https://cp3.irmp.ucl.ac.be/projects/delphes/) `v3.5.0`
 
 
 ## Update notes
