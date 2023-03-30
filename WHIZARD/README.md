@@ -12,6 +12,14 @@ The Docker image contains:
 * [FastJet](http://fastjet.fr/) `v3.4.0`
 * [PYTHIA](https://pythia.org/) `v8.309`
 
+## Installation
+
+- Check the [list of available tags on Docker Hub](https://hub.docker.com/r/yangphy/whizard/tags) to find the tag you want.
+- Use `docker pull` to pull down the image corresponding to the tag. For example:
+
+```
+docker pull yangphy/whizard:Ubuntu22.04-aarch64-1.0.0
+```
 
 ## Update notes
 
