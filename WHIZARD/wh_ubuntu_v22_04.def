@@ -83,14 +83,14 @@ RUN wget --no-check-certificate http://hepmc.web.cern.ch/hepmc/releases/hepmc${H
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD' -O './config.guess' \
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD' -O './config.sub' \
     && cd /home/${USER_NAME}/work/HEPtools \
-    && mkdir build hepmc \
+    && mkdir build hepmc2 \
     && cmake \
       -DCMAKE_CXX_COMPILER=$(which g++) \
       -DCMAKE_BUILD_TYPE=Release \
       -Dbuild_docs:BOOL=OFF \
       -Dmomentum:STRING=MEV \
       -Dlength:STRING=MM \
-      -DCMAKE_INSTALL_PREFIX=/home/${USER_NAME}/work/HEPtools/hepmc \
+      -DCMAKE_INSTALL_PREFIX=/home/${USER_NAME}/work/HEPtools/hepmc2 \
       -S /home/${USER_NAME}/work/HEPtools/HepMC-${HEPMC_VERSION} \
       -B /home/${USER_NAME}/work/HEPtools/build \
     && cmake build -L \
@@ -133,7 +133,7 @@ RUN wget https://pythia.org/download/pythia${PYTHIA_VERSION:0:2}/pythia${PYTHIA_
       --arch=Linux \
       --cxx=g++ \
       --with-gzip \
-      --with-hepmc2=/home/${USER_NAME}/work/HEPtools/hepmc \
+      --with-hepmc2=/home/${USER_NAME}/work/HEPtools/hepmc2 \
       --with-lhapdf6=/home/${USER_NAME}/work/HEPtools/lhapdf \
       --with-fastjet3=/home/${USER_NAME}/work/HEPtools/fastjet \
       --with-python=$(command -v python3) \
@@ -154,13 +154,13 @@ RUN wget https://whizard.hepforge.org/downloads/?f=whizard-${WH_VER}.tar.gz -O ~
     && cd /home/${USER_NAME}/work \
     && tar -xvf ~/whizard-${WH_VER}.tar.gz \
     && cd whizard-${WH_VER} \
-    && export HEPMC_DIR=/home/yang/work/HEPtools/hepmc \
+    && export HEPMC_DIR=/home/yang/work/HEPtools/hepmc2 \
     &&  ../whizard-${WH_VER}/configure \
       --prefix=/home/${USER_NAME}/work/whizard \
       --enable-fc-openmp --enable-python --enable-lhapdf \
       --enable-hepmc --enable-pythia8 --enable-fastjet \
       --with-pythia8=/home/${USER_NAME}/work/HEPtools/pythia8 \
-      --with-hepmc=/home/${USER_NAME}/work/HEPtools/hepmc \
+      --with-hepmc=/home/${USER_NAME}/work/HEPtools/hepmc2 \
       --with-fastjet=/home/${USER_NAME}/work/HEPtools/fastjet \
       --with-LHAPDF=/home/yang/work/HEPtools/lhapdf \
 # In Ubuntu 22.04 and future versions, the /usr/include/rpc is moved to /usr/include/tirpc

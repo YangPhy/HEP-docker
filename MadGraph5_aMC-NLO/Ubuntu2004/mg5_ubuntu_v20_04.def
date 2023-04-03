@@ -82,14 +82,14 @@ RUN wget --no-check-certificate http://hepmc.web.cern.ch/hepmc/releases/hepmc${H
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD' -O './config.guess' \
     && wget 'http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD' -O './config.sub' \
     && cd /home/${USER_NAME}/work/HEPtools \
-    && mkdir build hepmc \
+    && mkdir build hepmc2 \
     && cmake \
       -DCMAKE_CXX_COMPILER=$(which g++) \
       -DCMAKE_BUILD_TYPE=Release \
       -Dbuild_docs:BOOL=OFF \
       -Dmomentum:STRING=MEV \
       -Dlength:STRING=MM \
-      -DCMAKE_INSTALL_PREFIX=/home/${USER_NAME}/work/HEPtools/hepmc \
+      -DCMAKE_INSTALL_PREFIX=/home/${USER_NAME}/work/HEPtools/hepmc2 \
       -S /home/${USER_NAME}/work/HEPtools/HepMC-${HEPMC_VERSION} \
       -B /home/${USER_NAME}/work/HEPtools/build \
     && cmake build -L \
@@ -127,7 +127,7 @@ RUN wget https://pythia.org/download/pythia${PYTHIA_VERSION:0:2}/pythia${PYTHIA_
        --arch=Linux \
        --cxx=g++ \
        --with-gzip \
-       --with-hepmc2=/home/${USER_NAME}/work/HEPtools/hepmc \
+       --with-hepmc2=/home/${USER_NAME}/work/HEPtools/hepmc2 \
        --with-lhapdf6=/home/${USER_NAME}/work/HEPtools/lhapdf \
        --with-fastjet3=/home/${USER_NAME}/work/HEPtools/fastjet \
        --with-python=$(command -v python3) \
@@ -160,7 +160,7 @@ RUN wget https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/MG5_aMC_v${MG5_VER}
     && cd /home/${USER_NAME}/work && rm -rf MG5aMC_PY8_interface MG5aMC_PY8_interface_V${MG5aMC_PY8_INTERFACE_VERSION}.tar.gz \
     && sed -i 's|# auto_update.*|auto_update = 0|g' /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i "s|# fastjet.*|fastjet = /home/${USER_NAME}/work/HEPtools/fastjet/bin/fastjet-config|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
-    && sed -i "s|# hepmc.*|hepmc_path = /home/${USER_NAME}/work/HEPtools/hepmc|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
+    && sed -i "s|# hepmc.*|hepmc_path = /home/${USER_NAME}/work/HEPtools/hepmc2|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i "s|# lhapdf_py3.*|lhapdf_py3 = /home/${USER_NAME}/work/HEPtools/lhapdf/bin/lhapdf-config|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i "s|# pythia8.*|pythia8_path = /home/${USER_NAME}/work/HEPtools/pythia8|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i '/mg5amc_py8_interface_path =/s/^# //g' /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
