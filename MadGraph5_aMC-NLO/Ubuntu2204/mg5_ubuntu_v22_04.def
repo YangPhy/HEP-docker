@@ -172,9 +172,10 @@ RUN wget https://launchpad.net/mg5amcnlo/3.0/3.4.x/+download/MG5_aMC_v${MG5_VER}
     && sed -i "s|# lhapdf_py3.*|lhapdf_py3 = /home/${USER_NAME}/work/HEPtools/lhapdf/bin/lhapdf-config|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i "s|# pythia8.*|pythia8_path = /home/${USER_NAME}/work/HEPtools/pythia8|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i '/mg5amc_py8_interface_path =/s/^# //g' /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
-    && sed -i "s|# automatic_html_opening.*|automatic_html_opening = False|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
-    && echo "export PATH=\$PATH:/home/${USER_NAME}/work/MG5_aMC/bin" >> ~/.zshrc \
-    && echo "export PYTHONPATH=\$PYTHONPATH:/home/${USER_NAME}/work/MG5_aMC/" >> ~/.zshrc
+    && sed -i "s|# automatic_html_opening.*|automatic_html_opening = False|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt
+# Commenting out the following lines allows running ./bin/madevent    
+# && echo "export PATH=\$PATH:/home/${USER_NAME}/work/MG5_aMC/bin" >> ~/.zshrc \
+#    && echo "export PYTHONPATH=\$PYTHONPATH:/home/${USER_NAME}/work/MG5_aMC/" >> ~/.zshrc
 
 ENV PATH=/home/${USER_NAME}/work/MG5_aMC/bin:$PATH
 RUN cd ~ \
