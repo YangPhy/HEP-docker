@@ -24,7 +24,7 @@ docker pull yangphy/whizard:Ubuntu22.04-aarch64-1.0.0
 
 ## Update notes
 
-### There are some changes need to be done for the aarch64
+### There are some changes that need to be done for the `aarch64`
 
 * The ` -m64` flag is only used to specify that the compiled code should be 64-bit on x86-64 architecture (i.e., Intel or AMD) machines. On ARM-based architectures, such as Apple M1, the flag is not needed and will actually cause an error during compilation.
 * The `-mcmodel` is `small`, `medium`, and `large` for x86-64 architecture (i.e., Intel or AMD), while it is `tiny`, `small`, and `large` for aarch64. Since most of the makefiles were designed for x86-64 architecture, we need to manually change `medium` to `small` to compile the package on aarch64 machines.
@@ -33,14 +33,13 @@ docker pull yangphy/whizard:Ubuntu22.04-aarch64-1.0.0
 
 In Ubuntu 22.04 and future versions, the `/usr/include/rpc` is moved to `/usr/include/tirpc`
 
-* To compile Fastjet, need to set flags `LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc` for configure
-* For ExRootAnalysis, need to change `CXXFLAGS += $(ROOTCFLAGS) -Wno-write-strings -D_FILE_OFFSET_BITS=64 -DDROP_CGAL -I. -I/usr/include/tirpc` and ` LIBS = $(ROOTLIBS) -ltirpc` in the `Makefile`
+* To compile `WHIZARD` and `FastJet`, need to set flags `LIBS=-ltirpc CPPFLAGS=-I/usr/include/tirpc` for configure
 
 ### The `PYTHONPATH` issue
 
 In Ubuntu 22.04, the `.../lib/python3.8/site-packages` is changed to `.../lib/python3.10/dist-packages`
 
-For the following packages, the `PYTHONPATH` of `LHAPDF` need to be set different from its official instruction
+For the following packages, the `PYTHONPATH` of `LHAPDF` needs to be set differently from its official instruction
 
 * Fastjet
 * LHAPDF
