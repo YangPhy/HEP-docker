@@ -59,6 +59,14 @@ RUN wget https://launchpad.net/mg5amcnlo/lts/2.6.x/+download/MG5_aMC_v${MG5_VER}
     && sed -i 's|# auto_update.*|auto_update = 0|g' /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
     && sed -i "s|# automatic_html_opening.*|automatic_html_opening = False|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt
 
+ENV PATH=/home/${USER_NAME}/work/MG5_aMC/bin:$PATH
+RUN cd ~ \
+    && echo "install ninja" | mg5_aMC  \
+    && echo "install collier" | mg5_aMC  \
+    && echo "generate e+ e- > h h [noborn=QED]; output eehh_loop" | mg5_aMC \
+    && echo "set auto_convert_model T" | mg5_aMC \
+    && rm -rf eehh_loop py.py && rm -rf /home/${USER_NAME}/work/MG5_aMC/HEPTools/HEPToolsInstallers
+
 WORKDIR /home/${USER_NAME}/work
 RUN mkdir -p ~/Data
 
