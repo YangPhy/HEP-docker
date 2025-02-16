@@ -1,0 +1,72 @@
+ARG UBUNTU_VER=16.04
+FROM ubuntu:${UBUNTU_VER}
+
+LABEL maintainer="Yang Ma mayangluon@pitt.edu"
+LABEL build_date="2025-02-15"
+
+ARG USER_NAME=yang
+ARG OS_TYPE=x86_64
+#ARG OS_TYPE=aarch64
+ARG MG5_VER=2.5.5
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+SHELL [ "/bin/bash", "-c" ]
+
+# For users in China, please uncomment this part for faster sources from aliyun.com
+#RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+#    && sed -i s@/security.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+#    && apt clean && apt update
+
+
+RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker \
+    && echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker \
+    && apt update && apt install -y sudo \
+    && apt install -y gcc g++ gfortran make cmake vim git curl wget bc rsync \
+          openssh-client openssh-server screen tmux htop zlib1g zlib1g-dev \
+          libbz2-dev python\
+    && apt -y clean && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd -m ${USER_NAME} -s /bin/bash && adduser ${USER_NAME}  sudo \
+    && echo "${USER_NAME} ALL=(ALL) NOPASSWD : ALL" | tee /etc/sudoers.d/nopasswd4sudo
+
+USER ${USER_NAME}
+WORKDIR /home/${USER_NAME}
+
+# Install zsh
+RUN sudo apt update \
+    && sudo apt install -y zsh zsh-syntax-highlighting \
+    && sudo apt install -y ca-certificates &&  sudo update-ca-certificates \
+    && sudo apt -y clean && sudo apt-get -y autoremove \
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh \
+    && cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc \
+    && sed -i "s/robbyrussell/ys/" ~/.zshrc \
+    && echo "source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc \
+    && echo "setopt nonomatch" >> ~/.zshrc \
+    && echo "export TERM=xterm-256color" >> ~/.zshrc \
+    && sudo usermod -s /bin/zsh ${USER_NAME}
+
+WORKDIR /home/${USER_NAME}/work/HEPtools
+
+# Get a Madgraph
+RUN wget https://launchpad.net/mg5amcnlo/lts/2.5.x/+download/MG5_aMC_v${MG5_VER}.tar.gz -O /home/${USER_NAME}/work/MG5_aMC_v${MG5_VER}.tar.gz \
+    &&  cd /home/${USER_NAME}/work && mkdir -p MG5_aMC \
+    && tar -xvf ./MG5_aMC_v${MG5_VER}.tar.gz --strip=1 --directory=MG5_aMC \
+    && rm /home/${USER_NAME}/work/MG5_aMC_v${MG5_VER}.tar.gz \
+    && sed -i 's|# auto_update.*|auto_update = 0|g' /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt \
+    && sed -i "s|# automatic_html_opening.*|automatic_html_opening = False|g" /home/${USER_NAME}/work/MG5_aMC/input/mg5_configuration.txt
+
+ENV PATH=/home/${USER_NAME}/work/MG5_aMC/bin:$PATH
+RUN cd ~ \
+    && echo "install ninja" | mg5_aMC  \
+    && echo "install collier" | mg5_aMC  \
+    && echo "generate e+ e- > h h [noborn=QED]; output eehh_loop" | mg5_aMC \
+    && echo "set auto_convert_model T" | mg5_aMC \
+    && rm -rf eehh_loop py.py && rm -rf /home/${USER_NAME}/work/MG5_aMC/HEPTools/HEPToolsInstallers
+
+WORKDIR /home/${USER_NAME}/work
+RUN mkdir -p ~/Data
+
+ENTRYPOINT ["/bin/zsh", "-i"]
+
