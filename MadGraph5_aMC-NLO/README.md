@@ -1,12 +1,12 @@
 # [MadGraph5_aMC@NLO](https://launchpad.net/mg5amcnlo) Docker Image
-
-## Docker image for Python 3 compliant
-### Linux distributions
 The dockerfiles support both AMD64 and aarch64 platforms 
 
+## Linux distributions
 * [Ubuntu 20.04](Ubuntu2004/README.md)
 * [Ubuntu 22.04](Ubuntu2204/README.md)
 
+## Docker image for Python 3 compliant
+* [Python 3](Python3/README.md)
 ## Docker image for Python 2 compliant
 * [Python 2](Python2/README.md)
 
