@@ -1,4 +1,4 @@
-# MadGraph5_aMC-NLO Python 2 Docker Image for `MadGraph5_aMC@NLO`
+# Python 2 Docker Image for `MadGraph5_aMC@NLO`
 
 Docker image based on Ubuntu 16.04/20.04 for Python 2 compliant [MadGraph5_aMC@NLO](https://launchpad.net/mg5amcnlo). 
 
